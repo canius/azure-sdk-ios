@@ -8,7 +8,6 @@
 
 #import "CSAzureUploadSession.h"
 #import <TMCache/TMMemoryCache.h>
-#import "NSURLSessionTask+CSAdditions.h"
 
 NSString * const CSAzureUploadSessionErrorDomain = @"com.beyova.azure.upload.session.error";
 NSString * const CSAzureUploadSessionErrorMessageKey = @"com.beyova.azure.upload.session.error.message";
@@ -50,11 +49,11 @@ static void * CSAzureUploadSessionTaskStateChangedContext = &CSAzureUploadSessio
 -(BFTask *)upload:(CSAzureUploadRequest *)request
 {
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
-
+    
     NSURLSessionUploadTask *sessionUploadTask = [session uploadTaskWithRequest:[request buildUrlRequest] fromData:request.body completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSLog(@"completionHandler");
-        NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
 
+        NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
+        
         if (error) {
             [tcs setError:error];
         }
@@ -75,12 +74,12 @@ static void * CSAzureUploadSessionTaskStateChangedContext = &CSAzureUploadSessio
         else {
             [tcs setResult:nil];
         }
-
+        
     }];
-
+    
     if (request.progressHandler) {
         [sessionUploadTask addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:CSAzureUploadSessionTaskStateChangedContext];
-        [taskCache setObject:request.progressHandler forKey:sessionUploadTask.taskIdentifierString];
+        [taskCache setObject:request.progressHandler forKey:[CSAzureUploadSession taskIdentifierStringByTask:sessionUploadTask]];
     }
     
     [sessionUploadTask resume];
@@ -88,6 +87,10 @@ static void * CSAzureUploadSessionTaskStateChangedContext = &CSAzureUploadSessio
     return tcs.task;
 }
 
++(NSString *)taskIdentifierStringByTask:(NSURLSessionTask *)task
+{
+    return [[NSString alloc] initWithFormat:@"%lu",(unsigned long)task.taskIdentifier];
+}
 
 #pragma mark - KVO CSAzureUploadSessionTaskStateChangedContext
 
@@ -98,7 +101,7 @@ static void * CSAzureUploadSessionTaskStateChangedContext = &CSAzureUploadSessio
         if (state == NSURLSessionTaskStateCanceling || state == NSURLSessionTaskStateCompleted) {
             NSURLSessionTask *task = (NSURLSessionTask *)object;
             [task removeObserver:self forKeyPath:@"state" context:CSAzureUploadSessionTaskStateChangedContext];
-            [taskCache removeObjectForKey:task.taskIdentifierString];
+            [taskCache removeObjectForKey:[CSAzureUploadSession taskIdentifierStringByTask:task]];
         }
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -109,7 +112,7 @@ static void * CSAzureUploadSessionTaskStateChangedContext = &CSAzureUploadSessio
 
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
-    [taskCache objectForKey:task.taskIdentifierString
+    [taskCache objectForKey:[CSAzureUploadSession taskIdentifierStringByTask:task]
                       block:^(TMMemoryCache *cache, NSString *key, id object) {
                           if (object) {
                               CSAzureUploadSessionProgressBlock progressHandler = (CSAzureUploadSessionProgressBlock)object;

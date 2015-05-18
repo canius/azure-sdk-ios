@@ -11,7 +11,6 @@
 		573B97301A694C4500CE3CF8 /* CSAzureUploadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 573B972D1A694C4500CE3CF8 /* CSAzureUploadSession.m */; };
 		573B97311A694C4500CE3CF8 /* CSAzureUploadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 573B972F1A694C4500CE3CF8 /* CSAzureUploadRequest.m */; };
 		573B97331A694FE900CE3CF8 /* CSAzureUploadSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 573B97321A694FE900CE3CF8 /* CSAzureUploadSessionTests.m */; };
-		57C1A81E1A6B5D8B00B58E93 /* NSURLSessionTask+CSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C1A81D1A6B5D8B00B58E93 /* NSURLSessionTask+CSAdditions.m */; };
 		E7E948AB7B7F90B8CE2FDBD4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCB79C40DCA67F2D3AEF9C5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -50,8 +49,6 @@
 		578125B11A6AA3F500705316 /* AzureSDK.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AzureSDK.podspec; sourceTree = "<group>"; };
 		578125B21A6AA3F500705316 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		578125B31A6AA41000705316 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		57C1A81C1A6B5D8B00B58E93 /* NSURLSessionTask+CSAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSessionTask+CSAdditions.h"; sourceTree = "<group>"; };
-		57C1A81D1A6B5D8B00B58E93 /* NSURLSessionTask+CSAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSessionTask+CSAdditions.m"; sourceTree = "<group>"; };
 		5DC35CC03BF64587C7E777ED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		64A255356A4DEC0F306CFD13 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		6FCB79C40DCA67F2D3AEF9C5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,8 +103,6 @@
 				573B972D1A694C4500CE3CF8 /* CSAzureUploadSession.m */,
 				573B972E1A694C4500CE3CF8 /* CSAzureUploadRequest.h */,
 				573B972F1A694C4500CE3CF8 /* CSAzureUploadRequest.m */,
-				57C1A81C1A6B5D8B00B58E93 /* NSURLSessionTask+CSAdditions.h */,
-				57C1A81D1A6B5D8B00B58E93 /* NSURLSessionTask+CSAdditions.m */,
 			);
 			path = AzureSDK;
 			sourceTree = "<group>";
@@ -313,7 +308,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57C1A81E1A6B5D8B00B58E93 /* NSURLSessionTask+CSAdditions.m in Sources */,
 				573B97311A694C4500CE3CF8 /* CSAzureUploadRequest.m in Sources */,
 				573B97301A694C4500CE3CF8 /* CSAzureUploadSession.m in Sources */,
 			);

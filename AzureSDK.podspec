@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "AzureSDK"
-  s.version          = "0.0.1"
+  s.version          = "0.0.2"
   s.summary          = "Windows Azure SDK for iOS."
   s.description      = <<-DESC
                        The Windows Azure SDK for iOS provides a library.
